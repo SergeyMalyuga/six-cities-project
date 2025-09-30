@@ -1,3 +1,30 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
+import {AppRoute} from './core/constants/const';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  {
+    path: AppRoute.MAIN,
+    title: 'Main',
+    loadComponent: () => import('./pages/main/main.component').then(m => m.MainComponent)
+  },
+  {
+    path: AppRoute.LOGIN,
+    title: 'Login',
+    loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: `${AppRoute.OFFER}/:id`,
+    title: 'Offer',
+    loadComponent: () => import('./pages/offer/offer.component').then(m => m.OfferComponent)
+  },
+  {
+    path: AppRoute.FAVORITES,
+    title: 'Favorites',
+    loadComponent: () => import('./pages/favorites/favorites.component').then(m => m.FavoritesComponent)
+  },
+  {
+    path: '**',
+    title: 'Not found 404',
+    loadComponent: () => import('./pages/not-found/not-found-page.component').then(m => m.NotFoundPageComponent)
+  }
+];
