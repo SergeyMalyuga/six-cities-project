@@ -8,7 +8,7 @@
     <a href="#">
       <img
         class="place-card__image"
-        src="{{offer.previewImage}}"
+        src="{{ offer.previewImage }}"
         width="260"
         height="200"
         alt="Place image"
@@ -18,7 +18,7 @@
   <div class="place-card__info">
     <div class="place-card__price-wrapper">
       <div class="place-card__price">
-        <b class="place-card__price-value">&euro;{{offer.price}}</b>
+        <b class="place-card__price-value">&euro;{{ offer.price }}</b>
         <span class="place-card__price-text">&#47;&nbsp;night</span>
       </div>
       <button class="place-card__bookmark-button button" type="button">
@@ -35,8 +35,8 @@
       </div>
     </div>
     <h2 class="place-card__name">
-      <a href="#">{{offer.title}}</a>
+      <a href="#">{{ offer.title }}</a>
     </h2>
-    <p class="place-card__type">{{offer.type | capitalize}}</p>
+    <p class="place-card__type">{{ offer.type | capitalize }}</p>
   </div>
 </article>

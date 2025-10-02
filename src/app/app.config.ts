@@ -10,7 +10,7 @@ import {
 } from '@angular/common/http';
 import { AuthGuard } from './core/guards/auth.guard';
 import { rootReducer } from './store/app/reducer/app.reducer';
-import {OfferEffects} from './store/offer/effects/offer.effects';
+import { OfferEffects } from './store/offer/effects/offer.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [

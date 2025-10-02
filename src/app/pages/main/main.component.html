@@ -62,7 +62,10 @@
               <li class="places__option" tabindex="0">Top rated first</li>
             </ul>
           </form>
-          <app-offer-list [offers]="offers()"></app-offer-list>
+          <app-offer-list
+            (activeCardSelected)="onActiveCardSelected($event)"
+            [offers]="offers()"
+          ></app-offer-list>
         </section>
         <div class="cities__right-section">
           <section class="cities__map map"></section>

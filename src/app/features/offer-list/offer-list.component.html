@@ -1,5 +1,10 @@
 <div class="cities__places-list places__list tabs__content">
   @for (offer of offers; track offer.id) {
-    <app-card [offer]="offer"></app-card>
+    <app-card
+      appSelectActiveCard
+      [currentOffer]="offer"
+      (activeCardSelected)="onActiveCardSelected($event)"
+      [offer]="offer"
+    ></app-card>
   }
 </div>
