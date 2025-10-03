@@ -18,6 +18,7 @@ import {Comment} from '../../core/models/comments';
 import {CommentApiService} from '../../core/services/comment-api.service';
 import {CommentListComponent} from '../../features/comment-list/comment-list.component';
 import {LoaderComponent} from '../../shared/loader/loader.component';
+import {CommentFormComponent} from '../../features/comment-form/comment-form.component';
 
 @Component({
   selector: 'app-offer',
@@ -25,7 +26,8 @@ import {LoaderComponent} from '../../shared/loader/loader.component';
     HeaderComponent,
     CapitalizePipe,
     CommentListComponent,
-    LoaderComponent
+    LoaderComponent,
+    CommentFormComponent
   ],
   templateUrl: './offer.component.html',
   styleUrl: './offer.component.css',
@@ -36,7 +38,7 @@ export class OfferComponent {
   public comments: WritableSignal<Comment[]> = signal<Comment[]>([]);
   public commentsCount: Signal<number> = computed(() => this.comments().length);
 
-  private offerId: WritableSignal<string | null> = signal<string | null>(null);
+  public offerId: WritableSignal<string | null> = signal<string | null>(null);
   private activeRoute = inject(ActivatedRoute);
   private offerApiService: OfferApiService = inject(OfferApiService);
   private commentApiService: CommentApiService = inject(CommentApiService);
@@ -51,5 +53,11 @@ export class OfferComponent {
         this.commentApiService.getComments(id).pipe(takeUntil(this.destroySubject)).subscribe((comments: Comment[]) => this.comments.set(comments));
       }
     })
+  }
+
+  public onCommentPosted(comment: Comment) {
+    this.comments.update((comments) =>
+    [comment, ...comments]
+    )
   }
 }

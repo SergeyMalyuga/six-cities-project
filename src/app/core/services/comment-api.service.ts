@@ -16,7 +16,7 @@ export class CommentApiService {
     return this.http.get<Comment[]>(`${BASE_URL}/${APIRoute.COMMENTS}/${offerId}`);
   }
 
-  public postComment(offerId: string): Observable<Comment> {
-    return this.http.post<Comment>(`${BASE_URL}/${APIRoute.COMMENTS}/${offerId}`, {})
+  public postComment(offerId: string, comment: string, rating: number): Observable<Comment> {
+    return this.http.post<Comment>(`${BASE_URL}/${APIRoute.COMMENTS}/${offerId}`, {comment, rating})
   }
 }
