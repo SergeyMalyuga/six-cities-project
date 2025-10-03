@@ -18,12 +18,12 @@ const initialState: OffersState = offerAdapter.getInitialState({
 export const offerReducer = createReducer<OffersState>(
   initialState,
   on(loadOffers, (state: OffersState) => ({
-    ...state,
+    ...state, isLoading: true,
   })),
   on(loadOffersSuccess, (state: OffersState, { offers }) =>
-    offerAdapter.setAll(offers, state),
+    offerAdapter.setAll(offers, {...state, isLoading: false}),
   ),
   on(loadOffersFailure, (state: OffersState) => ({
-    ...state,
+    ...state, isLoading: false
   })),
 );

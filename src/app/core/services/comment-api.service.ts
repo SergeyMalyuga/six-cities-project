@@ -12,8 +12,8 @@ import {APIRoute, BASE_URL} from '../constants/const';
 export class CommentApiService {
   private http: HttpClient = inject(HttpClient);
 
-  public getComments(): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${BASE_URL}/${APIRoute.COMMENTS}`)
+  public getComments(offerId: string): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${BASE_URL}/${APIRoute.COMMENTS}/${offerId}`);
   }
 
   public postComment(offerId: string): Observable<Comment> {
