@@ -6,19 +6,19 @@ import {
   inject,
   Signal,
   signal,
-  WritableSignal
+  WritableSignal,
 } from '@angular/core';
-import {HeaderComponent} from '../../shared/header/header.component';
-import {Offer} from '../../core/models/offers';
-import {ActivatedRoute} from '@angular/router';
-import {OfferApiService} from '../../core/services/offer-api.service';
-import {Subject, takeUntil} from 'rxjs';
-import {CapitalizePipe} from '../../shared/pipes/capitalize.pipe';
-import {Comment} from '../../core/models/comments';
-import {CommentApiService} from '../../core/services/comment-api.service';
-import {CommentListComponent} from '../../features/comment-list/comment-list.component';
-import {LoaderComponent} from '../../shared/loader/loader.component';
-import {CommentFormComponent} from '../../features/comment-form/comment-form.component';
+import { HeaderComponent } from '../../shared/header/header.component';
+import { Offer } from '../../core/models/offers';
+import { ActivatedRoute } from '@angular/router';
+import { OfferApiService } from '../../core/services/offer-api.service';
+import { Subject, takeUntil } from 'rxjs';
+import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
+import { Comment } from '../../core/models/comments';
+import { CommentApiService } from '../../core/services/comment-api.service';
+import { CommentListComponent } from '../../features/comment-list/comment-list.component';
+import { LoaderComponent } from '../../shared/loader/loader.component';
+import { CommentFormComponent } from '../../features/comment-form/comment-form.component';
 
 @Component({
   selector: 'app-offer',
@@ -27,14 +27,16 @@ import {CommentFormComponent} from '../../features/comment-form/comment-form.com
     CapitalizePipe,
     CommentListComponent,
     LoaderComponent,
-    CommentFormComponent
+    CommentFormComponent,
   ],
   templateUrl: './offer.component.html',
   styleUrl: './offer.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferComponent {
-  public offer: WritableSignal<Offer | undefined> = signal<Offer | undefined>(undefined);
+  public offer: WritableSignal<Offer | undefined> = signal<Offer | undefined>(
+    undefined,
+  );
   public comments: WritableSignal<Comment[]> = signal<Comment[]>([]);
   public commentsCount: Signal<number> = computed(() => this.comments().length);
 
@@ -45,19 +47,25 @@ export class OfferComponent {
   private destroySubject: Subject<void> = new Subject<void>();
 
   constructor() {
-    this.activeRoute.paramMap.subscribe(params => this.offerId.set(params.get('id')));
+    this.activeRoute.paramMap.subscribe((params) =>
+      this.offerId.set(params.get('id')),
+    );
     effect(() => {
       const id = this.offerId();
       if (id) {
-        this.offerApiService.getOfferById(id).pipe(takeUntil(this.destroySubject)).subscribe((offer: Offer) => this.offer.set(offer))
-        this.commentApiService.getComments(id).pipe(takeUntil(this.destroySubject)).subscribe((comments: Comment[]) => this.comments.set(comments));
+        this.offerApiService
+          .getOfferById(id)
+          .pipe(takeUntil(this.destroySubject))
+          .subscribe((offer: Offer) => this.offer.set(offer));
+        this.commentApiService
+          .getComments(id)
+          .pipe(takeUntil(this.destroySubject))
+          .subscribe((comments: Comment[]) => this.comments.set(comments));
       }
-    })
+    });
   }
 
   public onCommentPosted(comment: Comment) {
-    this.comments.update((comments) =>
-    [comment, ...comments]
-    )
+    this.comments.update((comments) => [comment, ...comments]);
   }
 }

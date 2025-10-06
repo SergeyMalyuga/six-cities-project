@@ -1,12 +1,10 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {User} from '../models/user';
-import {APIRoute, BASE_URL} from '../constants/const';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
+import { APIRoute, BASE_URL } from '../constants/const';
 
-@Injectable(
-  {providedIn: 'root'}
-)
+@Injectable({ providedIn: 'root' })
 export class UserApiService {
   private http: HttpClient = inject(HttpClient);
 
@@ -15,7 +13,10 @@ export class UserApiService {
   }
 
   public postUser(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`${BASE_URL}/${APIRoute.LOGIN}`, {email, password});
+    return this.http.post<User>(`${BASE_URL}/${APIRoute.LOGIN}`, {
+      email,
+      password,
+    });
   }
 
   public deleteUser(): Observable<void> {

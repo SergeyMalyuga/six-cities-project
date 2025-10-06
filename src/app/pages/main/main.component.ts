@@ -6,10 +6,10 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import {HeaderComponent} from '../../shared/header/header.component';
-import {OfferPreview} from '../../core/models/offers';
-import {City} from '../../core/models/city';
-import {DEFAULT_CITY} from '../../core/constants/const';
+import { HeaderComponent } from '../../shared/header/header.component';
+import { OfferPreview } from '../../core/models/offers';
+import { City } from '../../core/models/city';
+import { DEFAULT_CITY } from '../../core/constants/const';
 import {
   combineLatest,
   distinctUntilChanged,
@@ -17,14 +17,15 @@ import {
   takeUntil,
   tap,
 } from 'rxjs';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../core/models/app.state';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../core/models/app.state';
 import {
   selectAllOffers,
-  selectCity, selectIsLoading,
+  selectCity,
+  selectIsLoading,
 } from '../../store/app/selectors/app.selectors';
-import {OfferListComponent} from '../../features/offer-list/offer-list.component';
-import {LoaderComponent} from '../../shared/loader/loader.component';
+import { OfferListComponent } from '../../features/offer-list/offer-list.component';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-main',
@@ -42,7 +43,9 @@ export class MainComponent implements OnInit, OnDestroy {
   private destroySubject: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.store.select(selectIsLoading).pipe(takeUntil(this.destroySubject))
+    this.store
+      .select(selectIsLoading)
+      .pipe(takeUntil(this.destroySubject))
       .subscribe((isLoading: boolean) => this.isLoading.set(isLoading));
     combineLatest([
       this.store.select(selectAllOffers),

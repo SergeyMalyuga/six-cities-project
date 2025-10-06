@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {RouterLink} from '@angular/router';
-import {APIRoute, AppRoute} from '../../core/constants/const';
+import { RouterLink } from '@angular/router';
+import { APIRoute, AppRoute } from '../../core/constants/const';
 
 @Component({
   selector: 'app-header',
-  imports: [
-    RouterLink
-  ],
+  imports: [RouterLink],
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
