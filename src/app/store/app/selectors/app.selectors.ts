@@ -1,11 +1,13 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from '../../../core/models/app.state';
-import { City } from '../../../core/models/city';
-import { offerAdapter } from '../../offer/reducer/offer.reducer';
-import { OffersState } from '../../../core/models/offers.state';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
+import {AppState} from '../../../core/models/app.state';
+import {City} from '../../../core/models/city';
+import {offerAdapter} from '../../offer/reducer/offer.reducer';
+import {OffersState} from '../../../core/models/offers.state';
+import {UserState} from '../../../core/models/user.state';
 
 const selectOfferState = createFeatureSelector<AppState['offers']>('offers');
 const selectCityState = createFeatureSelector<AppState['city']>('city');
+const selectUserState = createFeatureSelector<AppState['user']>('user');
 
 const offerSelectors = offerAdapter.getSelectors();
 
@@ -20,3 +22,13 @@ export const selectIsLoading = createSelector(
   selectOfferState,
   (state: OffersState) => state.isLoading,
 );
+
+export const selectAuthStatus = createSelector(
+  selectUserState,
+  (state: UserState) => state.authorizationStatus
+)
+
+export const selectUserEmail = createSelector(
+  selectUserState,
+  (state: UserState) => state.user?.email
+)
