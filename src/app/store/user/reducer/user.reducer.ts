@@ -7,7 +7,12 @@ import { createReducer, on } from '@ngrx/store';
 import {
   checkAuth,
   checkAuthFailure,
-  checkAuthSuccess, loginFailure, loginSuccess, logout, logoutFailure, logoutSuccess,
+  checkAuthSuccess,
+  loginFailure,
+  loginSuccess,
+  logout,
+  logoutFailure,
+  logoutSuccess,
 } from '../actions/user.actions';
 
 const initialState: UserState = {
@@ -32,19 +37,24 @@ export const userReducer = createReducer(
   on(loginSuccess, (state) => ({
     ...state,
   })),
-  on(loginSuccess, (state, {user}) => ({
-    ...state, user, authorizationStatus: AuthorizationStatus.AUTH,
+  on(loginSuccess, (state, { user }) => ({
+    ...state,
+    user,
+    authorizationStatus: AuthorizationStatus.AUTH,
   })),
   on(loginFailure, (state) => ({
-    ...state, authorizationStatus: AuthorizationStatus.UN_AUTH,
+    ...state,
+    authorizationStatus: AuthorizationStatus.UN_AUTH,
   })),
   on(logout, (state) => ({
     ...state,
   })),
   on(logoutSuccess, (state) => ({
-    ...state, user: DEFAULT_USER, authorizationStatus: AuthorizationStatus.UN_AUTH,
+    ...state,
+    user: DEFAULT_USER,
+    authorizationStatus: AuthorizationStatus.UN_AUTH,
   })),
   on(logoutFailure, (state) => ({
     ...state,
-  }))
+  })),
 );

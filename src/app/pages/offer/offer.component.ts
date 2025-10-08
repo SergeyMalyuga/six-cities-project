@@ -9,7 +9,7 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { HeaderComponent } from '../../shared/header/header.component';
-import { Offer } from '../../core/models/offers';
+import { Offer, OfferPreview } from '../../core/models/offers';
 import { ActivatedRoute } from '@angular/router';
 import { OfferApiService } from '../../core/services/offer-api.service';
 import { Subject, takeUntil } from 'rxjs';
@@ -19,6 +19,8 @@ import { CommentApiService } from '../../core/services/comment-api.service';
 import { CommentListComponent } from '../../features/comment-list/comment-list.component';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { CommentFormComponent } from '../../features/comment-form/comment-form.component';
+import { CardComponent } from '../../shared/card/card.component';
+import { FirstOffersPipe } from './pipes/first-offers.pipe';
 
 @Component({
   selector: 'app-offer',
@@ -28,6 +30,8 @@ import { CommentFormComponent } from '../../features/comment-form/comment-form.c
     CommentListComponent,
     LoaderComponent,
     CommentFormComponent,
+    CardComponent,
+    FirstOffersPipe,
   ],
   templateUrl: './offer.component.html',
   styleUrl: './offer.component.css',
@@ -36,6 +40,9 @@ import { CommentFormComponent } from '../../features/comment-form/comment-form.c
 export class OfferComponent {
   public offer: WritableSignal<Offer | undefined> = signal<Offer | undefined>(
     undefined,
+  );
+  public nearbyOffers: WritableSignal<OfferPreview[]> = signal<OfferPreview[]>(
+    [],
   );
   public comments: WritableSignal<Comment[]> = signal<Comment[]>([]);
   public commentsCount: Signal<number> = computed(() => this.comments().length);
@@ -57,6 +64,10 @@ export class OfferComponent {
           .getOfferById(id)
           .pipe(takeUntil(this.destroySubject))
           .subscribe((offer: Offer) => this.offer.set(offer));
+        this.offerApiService
+          .getNearbyOffers(id)
+          .pipe(takeUntil(this.destroySubject))
+          .subscribe((offers) => this.nearbyOffers.set(offers));
         this.commentApiService
           .getComments(id)
           .pipe(takeUntil(this.destroySubject))

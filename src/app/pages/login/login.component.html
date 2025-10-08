@@ -21,7 +21,13 @@
     <div class="page__login-container container">
       <section class="login">
         <h1 class="login__title">Sign in</h1>
-        <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" class="login__form form" action="#" method="post">
+        <form
+          (ngSubmit)="onSubmit()"
+          [formGroup]="formGroup"
+          class="login__form form"
+          action="#"
+          method="post"
+        >
           <div class="login__input-wrapper form__input-wrapper">
             <label for="login__input-email" class="visually-hidden"
               >E-mail</label
@@ -39,15 +45,14 @@
           <div
             class="form__error-email"
             *ngIf="
-                formGroup.get('email')?.invalid &&
-                formGroup.get('email')?.touched
-              "
+              formGroup.get('email')?.invalid && formGroup.get('email')?.touched
+            "
           >
             <small *ngIf="formGroup.get('email')?.errors?.['required']"
-            >Email is required</small
+              >Email is required</small
             >
             <small *ngIf="formGroup.get('email')?.errors?.['email']"
-            >Invalid email format</small
+              >Invalid email format</small
             >
           </div>
 
@@ -68,15 +73,15 @@
           <div
             class="form__error-password"
             *ngIf="
-                formGroup.get('password')?.invalid &&
-                formGroup.get('password')?.touched
-              "
+              formGroup.get('password')?.invalid &&
+              formGroup.get('password')?.touched
+            "
           >
             <small *ngIf="formGroup.get('password')?.errors?.['required']"
-            >Password is required</small
+              >Password is required</small
             >
             <small *ngIf="formGroup.get('password')?.errors?.['pattern']"
-            >Invalid password format</small
+              >Invalid password format</small
             >
           </div>
 
