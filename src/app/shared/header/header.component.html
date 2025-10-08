@@ -1,7 +1,6 @@
 <header class="header">
   <div class="container">
     <div class="header__wrapper">
-      @if (authStatus() === AuthorizationStatus.AUTH) {
         <div class="header__left">
           <a
             class="header__logo-link header__logo-link--active"
@@ -16,8 +15,6 @@
             />
           </a>
         </div>
-      }
-
       <nav class="header__nav">
         <ul class="header__nav-list">
           @if (authStatus() === AuthorizationStatus.AUTH) {
@@ -32,7 +29,7 @@
             </li>
           }
           <li class="header__nav-item">
-            <a class="header__nav-link" [routerLink]="[authStatus() !== AuthorizationStatus.AUTH ? AppRoute.LOGIN : '']">
+            <a (click)="onSignOut()" class="header__nav-link" [routerLink]="[authStatus() !== AuthorizationStatus.AUTH ? AppRoute.LOGIN : '']">
               <span class="header__signout">{{authStatus() === AuthorizationStatus.AUTH ? 'Sign out' : 'Log in'}}</span>
             </a>
           </li>

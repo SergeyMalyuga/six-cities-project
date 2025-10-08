@@ -15,12 +15,13 @@ import { OfferEffects } from './store/offer/effects/offer.effects';
 import {UserAuthEffects} from './store/user/effects/user-auth.effects';
 import {UserLoginEffects} from './store/user/effects/user-login.effects';
 import {AuthInterceptor} from './core/interceptors/auth.interceptor';
+import {UserLogoutEffect} from './store/user/effects/user-logout.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideEffects(OfferEffects, UserAuthEffects, UserLoginEffects),
+    provideEffects(OfferEffects, UserAuthEffects, UserLoginEffects, UserLogoutEffect),
     provideStore(rootReducer),
     provideHttpClient(withInterceptorsFromDi()),
     {

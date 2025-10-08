@@ -19,3 +19,7 @@ export const loginSuccess = createAction(
   props<{ user: User }>(),
 );
 export const loginFailure = createAction('[App component] Login Failure');
+
+export const logout = createAction('[Main Component] Logout');
+export const logoutSuccess = createAction('[Main Component] Logout Success');
+export const logoutFailure = createAction('[Main Component] Logout Failure');
