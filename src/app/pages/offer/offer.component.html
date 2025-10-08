@@ -103,10 +103,12 @@
                 <span class="reviews__amount">{{ commentsCount() }}</span>
               </h2>
               <app-comment-list [comments]="comments()"></app-comment-list>
-              <app-comment-form
-                [commentId]="offerId()"
-                (commentPosted)="onCommentPosted($event)"
-              ></app-comment-form>
+              @if (authStatus() === AuthorizationStatus.AUTH) {
+                <app-comment-form
+                  [commentId]="offerId()"
+                  (commentPosted)="onCommentPosted($event)"
+                ></app-comment-form>
+              }
             </section>
           </div>
         </div>
