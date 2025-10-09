@@ -16,7 +16,7 @@ import { UserAuthEffects } from './store/user/effects/user-auth.effects';
 import { UserLoginEffects } from './store/user/effects/user-login.effects';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { UserLogoutEffect } from './store/user/effects/user-logout.effects';
-import {FavoriteOfferEffects} from './store/favorite-offer/effects/favorite-offer.effects';
+import { FavoriteOfferEffects } from './store/favorite-offer/effects/favorite-offer.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
       UserAuthEffects,
       UserLoginEffects,
       UserLogoutEffect,
-      FavoriteOfferEffects
+      FavoriteOfferEffects,
     ),
     provideStore(rootReducer),
     provideHttpClient(withInterceptorsFromDi()),
