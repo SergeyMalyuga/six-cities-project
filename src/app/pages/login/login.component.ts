@@ -9,7 +9,7 @@ import {
 import { Store } from '@ngrx/store';
 import { AppState } from '../../core/models/app.state';
 import { login } from '../../store/user/actions/user.actions';
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { selectAuthStatus } from '../../store/app/selectors/app.selectors';
 import { filter, take } from 'rxjs';
 import { AppRoute, AuthorizationStatus } from '../../core/constants/const';

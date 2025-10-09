@@ -30,7 +30,8 @@
             <a
               (click)="onSignOut()"
               class="header__nav-link"
-              [routerLink]="['/',
+              [routerLink]="[
+                '/',
                 authStatus() !== AuthorizationStatus.AUTH ? AppRoute.LOGIN : '',
               ]"
             >
