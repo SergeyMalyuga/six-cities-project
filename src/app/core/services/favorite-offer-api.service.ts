@@ -16,7 +16,7 @@ export class FavoriteOfferApiService {
 
   public changeStatus(offerId: string, status: number): Observable<Offer> {
     return this.http.post<Offer>(
-      `${BASE_URL}/${APIRoute.OFFERS}/${offerId}/${status}`,
+      `${BASE_URL}/${APIRoute.FAVORITE}/${offerId}/${status}`,
       {},
     );
   }

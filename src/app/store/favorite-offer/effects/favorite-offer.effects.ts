@@ -4,6 +4,7 @@ import { FavoriteOfferApiService } from '../../../core/services/favorite-offer-a
 import { catchError, map, of, switchMap } from 'rxjs';
 import * as actions from '../actions/favorite-offer.actions';
 import { changeFavoriteStatusFailure } from '../actions/favorite-offer.actions';
+import { OfferApiService } from '../../../core/services/offer-api.service';
 
 @Injectable()
 export class FavoriteOfferEffects {
@@ -11,6 +12,7 @@ export class FavoriteOfferEffects {
   private favoriteOffersApiService: FavoriteOfferApiService = inject(
     FavoriteOfferApiService,
   );
+  private offerApiService: OfferApiService = inject(OfferApiService);
 
   loadFavoriteOffers$ = createEffect(() =>
     this.actions$.pipe(
@@ -31,8 +33,14 @@ export class FavoriteOfferEffects {
       ofType(actions.changeFavoriteStatus),
       switchMap(({ offerId, status }) =>
         this.favoriteOffersApiService.changeStatus(offerId, status).pipe(
-          map((offer) => actions.changeFavoriteStatusSuccess({ offer })),
-          catchError(() => of(changeFavoriteStatusFailure())),
+          switchMap((offer) =>
+            this.offerApiService.getOffers().pipe(
+              map((offers) =>
+                actions.changeFavoriteStatusSuccess({ offer, offers }),
+              ),
+              catchError(() => of(changeFavoriteStatusFailure())),
+            ),
+          ),
         ),
       ),
     ),

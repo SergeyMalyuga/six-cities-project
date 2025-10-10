@@ -7,6 +7,7 @@ import {
   loadOffersFailure,
   loadOffersSuccess,
 } from '../actions/offer.actions';
+import { changeFavoriteStatusSuccess } from '../../favorite-offer/actions/favorite-offer.actions';
 
 export const offerAdapter: EntityAdapter<OfferPreview> =
   createEntityAdapter<OfferPreview>();
@@ -28,4 +29,10 @@ export const offerReducer = createReducer<OffersState>(
     ...state,
     isLoading: false,
   })),
+  on(changeFavoriteStatusSuccess, (state, { offer }) =>
+    offerAdapter.updateOne(
+      { id: offer.id, changes: { isFavorite: offer.isFavorite } },
+      { ...state },
+    ),
+  ),
 );

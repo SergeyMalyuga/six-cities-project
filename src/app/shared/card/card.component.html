@@ -23,6 +23,11 @@
       </div>
       <button
         appToggleFavoriteOffers
+        [authStatus]="authStatus()"
+        [isOfferPage]="false"
+        (favoriteOffersToggled)="onFavoriteOfferToggled()"
+        [disabled]="isFavoriteDisabled()"
+        [class.place-card__bookmark-button--active]="offer.isFavorite"
         class="place-card__bookmark-button button"
         type="button"
       >

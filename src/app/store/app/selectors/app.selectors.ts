@@ -8,6 +8,8 @@ import { UserState } from '../../../core/models/user.state';
 const selectOfferState = createFeatureSelector<AppState['offers']>('offers');
 const selectCityState = createFeatureSelector<AppState['city']>('city');
 const selectUserState = createFeatureSelector<AppState['user']>('user');
+const selectFavoriteOfferState =
+  createFeatureSelector<AppState['favoriteOffers']>('favoriteOffers');
 
 const offerSelectors = offerAdapter.getSelectors();
 
@@ -31,4 +33,9 @@ export const selectAuthStatus = createSelector(
 export const selectUserEmail = createSelector(
   selectUserState,
   (state: UserState) => state.user?.email,
+);
+
+export const selectFavoriteOffersLoading = createSelector(
+  selectFavoriteOfferState,
+  (state: OffersState) => state.isLoading,
 );

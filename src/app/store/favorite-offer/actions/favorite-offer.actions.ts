@@ -24,6 +24,7 @@ export const changeFavoriteStatusSuccess = createAction(
   '[Card component] Change Favorite Status Success',
   props<{
     offer: Offer;
+    offers: OfferPreview[];
   }>(),
 );
 export const changeFavoriteStatusFailure = createAction(

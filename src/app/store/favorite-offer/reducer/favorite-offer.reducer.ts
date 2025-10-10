@@ -3,6 +3,9 @@ import { OfferPreview } from '../../../core/models/offers';
 import { FavoriteOffersState } from '../../../core/models/favorite-offers.state';
 import { createReducer, on } from '@ngrx/store';
 import {
+  changeFavoriteStatus,
+  changeFavoriteStatusFailure,
+  changeFavoriteStatusSuccess,
   loadFavoriteOffers,
   loadFavoriteOffersFailure,
   loadFavoriteOffersSuccess,
@@ -27,5 +30,16 @@ export const favoriteOffersReducer = createReducer(
   ),
   on(loadFavoriteOffersFailure, (state) => ({
     ...state,
+  })),
+  on(changeFavoriteStatus, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(changeFavoriteStatusSuccess, (state, { offers }) =>
+    favoriteOffersAdapter.setAll(offers, { ...state, isLoading: false }),
+  ),
+  on(changeFavoriteStatusFailure, (state) => ({
+    ...state,
+    isLoading: false,
   })),
 );
